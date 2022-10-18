@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import SingUp from "../views/SingUp.vue";
+import SingUp from "../views/SignUp.vue";
 import AccountUser from "../views/LogIn.vue";
 import ToDo from "../views/ToDo.vue";
 import App from "../App.vue";
@@ -20,10 +20,6 @@ const router = createRouter({
       path: "/log-in",
       name: "LogIn",
       component: AccountUser,
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      // component: () => import("../views/AboutView.vue"),
     },
     {
       path: "/ToDo",

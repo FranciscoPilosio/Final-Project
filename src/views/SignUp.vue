@@ -38,7 +38,7 @@ export default {
       <!-- Icon -->
       <div class="fadeIn first">
         <!-- <img src="@/assets/ironhack-1.svg" id="icon" alt="User Icon" /> -->
-        <h1>Sing Up</h1>
+        <h1>Sign Up</h1>
       </div>
 
       <!-- Login Form -->
