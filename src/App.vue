@@ -1,10 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-
-import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "./stores/user";
-import { store } from "./stores/store";
 import { supabase } from "./supabase";
 import Navbar from "./components/Navbar.vue";
 import ToDo from "./views/Todo.vue";
@@ -20,4 +17,8 @@ const { user } = storeToRefs(userStore);
   </header>
 </template>
 
-<style></style>
+<style>
+header {
+  text-align: center;
+}
+</style>

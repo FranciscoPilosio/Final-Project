@@ -1,28 +1,19 @@
 <script>
 import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { supabase } from "../supabase";
-import { useUserStore } from "../stores/user";
 
 export default {
   setup() {
-    const router = useRouter;
     const newTask = ref("");
     const tasks = ref([]);
-    const userStore = useUserStore();
-
-    const signOut = async function signOut() {
-      const { error } = await supabase.auth.signOut();
-      userStore.singOut();
-      console.log("hola", userStore);
-    };
 
     const addNewTask = () => {
-      tasks.value.push({
-        done: false,
-        content: newTask.value,
-      });
-      newTask.value = "";
+      if (newTask.value.length >= 1) {
+        tasks.value.push({
+          done: false,
+          content: newTask.value,
+        });
+        newTask.value = "";
+      }
     };
 
     const deleteTask = (index) => {
@@ -34,7 +25,6 @@ export default {
     };
 
     return {
-      signOut,
       addNewTask,
       deleteTask,
       deleteAllTask,
@@ -48,8 +38,18 @@ export default {
 <template>
   <h1>To do list</h1>
   <form @submit.prevent="addNewTask">
-    <label> New task </label>
-    <input name="newTask" v-model="newTask" />
+    <div class="form-floating">
+      <input
+        rows="1"
+        class="form-control"
+        placeholder="Leave a comment here"
+        id="floatingTextarea"
+        name="newTask"
+        v-model="newTask"
+      />
+      <label for="floatingTextarea">Add New Task</label>
+    </div>
+
     <button>Add task</button>
   </form>
   <ul>
@@ -58,14 +58,35 @@ export default {
         <p>
           {{ task.content }}
         </p>
-        <button @click="deleteTask(index)">Remove</button>
+        <button
+          @click="deleteTask(index)"
+          type="button"
+          class="btn btn-primary"
+        >
+          Remove
+        </button>
       </li>
     </div>
   </ul>
-  <button @click="deleteAllTask">Remove all task</button>
   <div>
-    <button @click="[supabase.auth.signOut()]">Sign Out</button>
+    <h2 v-if="!tasks.length">No tasks pending!</h2>
   </div>
+  <button
+    v-if="tasks.length >= 2"
+    @click="deleteAllTask"
+    type="button"
+    class="btn btn-primary"
+  >
+    Remove all tasks
+  </button>
 </template>
 
-<style></style>
+<style>
+h2 {
+  color: black;
+}
+ul {
+  list-style-type: none;
+  text-align-last: left;
+}
+</style>
