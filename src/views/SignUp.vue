@@ -36,7 +36,7 @@ export default {
       <!-- Tabs Titles -->
 
       <!-- Icon -->
-      <div class="fadeIn first">
+      <div class="fadeIn first mt-5">
         <!-- <img src="@/assets/ironhack-1.svg" id="icon" alt="User Icon" /> -->
         <h1>Sign Up</h1>
       </div>
@@ -53,19 +53,27 @@ export default {
         />
         <input
           type="password"
-          id="password"
+          id="confirm password"
           class="fadeIn third"
           name="login"
           placeholder="password"
+          v-model="password"
+        />
+        <input
+          type="password"
+          id="password"
+          class="fadeIn third"
+          name="login"
+          placeholder="confirm password"
           v-model="password"
         />
         <input type="submit" class="fadeIn fourth" value="Register" />
       </form>
 
       <!-- Remind Passowrd -->
-      <div id="formFooter">
+      <!-- <div id="formFooter">
         <a class="underlineHover" href="#">Forgot Password?</a>
-      </div>
+      </div> -->
     </div>
   </div>
   <!-- <router-view></router-view> -->
@@ -99,7 +107,7 @@ h2 {
 }
 
 form {
-  padding-top: 50px;
+  padding-top: 20px;
 }
 /* STRUCTURE */
 

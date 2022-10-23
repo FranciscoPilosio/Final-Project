@@ -36,7 +36,7 @@ export default {
 </script>
 
 <template>
-  <h1>To do list</h1>
+  <h1 class="pt-4">To do list</h1>
   <form @submit.prevent="addNewTask">
     <div class="form-floating">
       <input
@@ -50,26 +50,32 @@ export default {
       <label for="floatingTextarea">Add New Task</label>
     </div>
 
-    <button>Add task</button>
+    <button class="btn btn-primary mt-3 mb-3">Add task</button>
   </form>
   <ul>
-    <div>
-      <li v-for="(task, index) in tasks" :key="index">
-        <p>
+    <li v-for="(task, index) in tasks" :key="index">
+      <div class="d-flex bd-highlight">
+        <p class="p-2 flex-grow-1 bd-highlight">
           {{ task.content }}
         </p>
-        <button
-          @click="deleteTask(index)"
-          type="button"
-          class="btn btn-primary"
-        >
-          Remove
-        </button>
-      </li>
-    </div>
+        <div class="p-2 bd-highlight">
+          <font-awesome-icon icon="trash" @click="deleteTask(index)" />
+          <!-- <button
+            type="button"
+            class="btn btn-primary"
+          >
+            Remove
+          </button> -->
+        </div>
+        <div class="p-2 bd-highlight pe-5">
+          <font-awesome-icon icon="pen" />
+          <!-- <button type="button" class="btn btn-primary">Edit</button> -->
+        </div>
+      </div>
+    </li>
   </ul>
   <div>
-    <h2 v-if="!tasks.length">No tasks pending!</h2>
+    <h2 v-if="!tasks.length">No tasks pending! Well done</h2>
   </div>
   <button
     v-if="tasks.length >= 2"

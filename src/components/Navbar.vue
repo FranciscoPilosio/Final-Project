@@ -1,28 +1,26 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import { useUserStore } from "../stores/user";
-import { supabase } from "../supabase";
 
 const userStore = useUserStore();
 
 const signOut = async function signOut() {
-  const { error } = await supabase.auth.signOut();
   userStore.singOut();
-  console.log("hola", userStore);
+  userStore.user = null;
 };
 </script>
 
 <template>
-  <nav class="navbar bg-light">
+  <nav class="navbar bg-light pt-3 pb-3">
     <div class="container-fluid">
       <RouterLink :to="{ name: `home` }" class="navbar-brand" id="toDoList">
-        <img
+        <!-- <img
           src="src/assets/ironhack-1.svg"
           alt="Logo"
           width="30"
           height="24"
           class="d-inline-block align-text-top"
-        />
+        /> -->
         To Do List App
       </RouterLink>
       <div>
@@ -32,17 +30,17 @@ const signOut = async function signOut() {
           class="btn btn-primary"
           @click="signOut"
         >
-          <RouterLink :to="{ name: `home` }">Log out</RouterLink>
+          <RouterLink :to="{ name: `LogIn` }">Log out</RouterLink>
         </button>
       </div>
 
       <div v-if="userStore.user === null">
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary me-3">
           <RouterLink :to="{ name: `LogIn` }">Log in</RouterLink>
         </button>
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary me-3">
           <RouterLink class="underlineHover" :to="{ name: `SignUp` }"
-            >Sing up</RouterLink
+            >Sign up</RouterLink
           >
         </button>
       </div>

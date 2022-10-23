@@ -46,7 +46,7 @@ export default {
       <!-- Tabs Titles -->
 
       <!-- Icon -->
-      <div class="fadeIn first">
+      <div class="fadeIn first mt-5">
         <!-- <img src="@/assets/ironhack-1.svg" id="icon" alt="User Icon" /> -->
         <h1>Log In</h1>
       </div>
@@ -77,9 +77,9 @@ export default {
       </form>
 
       <!-- Remind Passowrd -->
-      <div id="formFooter">
+      <!-- <div id="formFooter">
         <a class="underlineHover" href="#">Forgot Password?</a>
-      </div>
+      </div> -->
     </div>
   </div>
   <router-view></router-view>
@@ -113,7 +113,7 @@ h2 {
 }
 
 form {
-  padding-top: 50px;
+  padding-top: 20px;
 }
 /* STRUCTURE */
 
