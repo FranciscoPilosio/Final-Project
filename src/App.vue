@@ -1,8 +1,10 @@
 <script setup>
 import { useUserStore } from "./stores/user";
+import { storeToRefs } from "pinia";
 import Navbar from "./components/Navbar.vue";
 
 const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
 </script>
 
 <template>

@@ -36,7 +36,9 @@ const signOut = async function signOut() {
 
       <div v-if="userStore.user === null">
         <button type="button" class="btn btn-primary me-3">
-          <RouterLink :to="{ name: `LogIn` }">Log in</RouterLink>
+          <RouterLink class="underlineHover" :to="{ name: `LogIn` }"
+            >Log in</RouterLink
+          >
         </button>
         <button type="button" class="btn btn-primary me-3">
           <RouterLink class="underlineHover" :to="{ name: `SignUp` }"

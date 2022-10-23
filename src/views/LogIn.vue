@@ -1,7 +1,6 @@
 <script>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { storeToRefs } from "pinia";
 import { useUserStore } from "../stores/user";
 import { supabase } from "../supabase";
 
@@ -70,16 +69,8 @@ export default {
           v-model="password"
         />
 
-        <!-- <button type="submit" class="fadeIn fourth" value="Log In">
-          <RouterLink :to="{ name: `ToDo` }">Log In</RouterLink>
-        </button> -->
         <input type="submit" class="fadeIn fourth" value="Log In" />
       </form>
-
-      <!-- Remind Passowrd -->
-      <!-- <div id="formFooter">
-        <a class="underlineHover" href="#">Forgot Password?</a>
-      </div> -->
     </div>
   </div>
   <router-view></router-view>

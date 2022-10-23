@@ -60,16 +60,9 @@ export default {
         </p>
         <div class="p-2 bd-highlight">
           <font-awesome-icon icon="trash" @click="deleteTask(index)" />
-          <!-- <button
-            type="button"
-            class="btn btn-primary"
-          >
-            Remove
-          </button> -->
         </div>
         <div class="p-2 bd-highlight pe-5">
           <font-awesome-icon icon="pen" />
-          <!-- <button type="button" class="btn btn-primary">Edit</button> -->
         </div>
       </div>
     </li>

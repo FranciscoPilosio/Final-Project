@@ -11,15 +11,16 @@ export default {
     const email = ref("");
     const password = ref("");
     const register = async () => {
-      try {
-        const { error } = await supabase.auth.signUp({
-          email: email.value,
-          password: password.value,
-        });
-        console.log(email, password);
-      } catch (error) {
-        console.log(error);
-      }
+      // try {
+      //   const { error } = await supabase.auth.signUp({
+      //     email: email.value,
+      //     password: password.value,
+      //   });
+      //   console.log(email, password);
+      // } catch (error) {
+      //   console.log(error);
+      // }
+      await userStore.signUp(email.value, password.value);
     };
     return {
       email,
@@ -53,20 +54,20 @@ export default {
         />
         <input
           type="password"
-          id="confirm password"
+          id="password"
           class="fadeIn third"
           name="login"
           placeholder="password"
           v-model="password"
         />
-        <input
+        <!-- <input
           type="password"
-          id="password"
+          id="confirm password"
           class="fadeIn third"
           name="login"
           placeholder="confirm password"
           v-model="password"
-        />
+        /> -->
         <input type="submit" class="fadeIn fourth" value="Register" />
       </form>
 
