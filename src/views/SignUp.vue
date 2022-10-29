@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../stores/user";
 import { supabase } from "../supabase";
+import router from "../router";
 
 export default {
   setup() {
@@ -11,17 +12,15 @@ export default {
     const email = ref("");
     const password = ref("");
     const register = async () => {
-      // try {
-      //   const { error } = await supabase.auth.signUp({
-      //     email: email.value,
-      //     password: password.value,
-      //   });
-      //   console.log(email, password);
-      // } catch (error) {
-      //   console.log(error);
-      // }
       await userStore.signUp(email.value, password.value);
+      if (user) {
+        router.push({ path: "/log-in" });
+        console.log(user);
+      } else {
+        router.push({ path: "/sign-up" });
+      }
     };
+
     return {
       email,
       password,
@@ -70,11 +69,6 @@ export default {
         /> -->
         <input type="submit" class="fadeIn fourth" value="Register" />
       </form>
-
-      <!-- Remind Passowrd -->
-      <!-- <div id="formFooter">
-        <a class="underlineHover" href="#">Forgot Password?</a>
-      </div> -->
     </div>
   </div>
   <!-- <router-view></router-view> -->

@@ -1,21 +1,16 @@
 <script setup>
-import { useUserStore } from "./stores/user";
-import { storeToRefs } from "pinia";
 import Navbar from "./components/Navbar.vue";
-
-const userStore = useUserStore();
-const { user } = storeToRefs(userStore);
 </script>
 
 <template>
   <header><Navbar /></header>
-  <body>
-    <div class="wrapper"></div>
-  </body>
+  <body></body>
 </template>
 
 <style>
 body {
   text-align: center;
+  background-image: url("./assets/mountains-gf0445e953_1920.png");
+  background-size: cover;
 }
 </style>

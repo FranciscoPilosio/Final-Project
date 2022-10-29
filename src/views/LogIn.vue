@@ -17,8 +17,8 @@ export default {
           email: email.value,
           password: password.value,
         });
-        console.log(user);
         userStore.user = user;
+        console.log(user);
 
         if (user) {
           router.push({ path: "/ToDo" });

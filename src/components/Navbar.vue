@@ -6,6 +6,8 @@ const userStore = useUserStore();
 
 const signOut = async function signOut() {
   userStore.singOut();
+
+  console.log(userStore);
   userStore.user = null;
 };
 </script>
@@ -14,13 +16,6 @@ const signOut = async function signOut() {
   <nav class="navbar bg-light pt-3 pb-3">
     <div class="container-fluid">
       <RouterLink :to="{ name: `home` }" class="navbar-brand" id="toDoList">
-        <!-- <img
-          src="src/assets/ironhack-1.svg"
-          alt="Logo"
-          width="30"
-          height="24"
-          class="d-inline-block align-text-top"
-        /> -->
         To Do List App
       </RouterLink>
       <div>
