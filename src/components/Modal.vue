@@ -16,13 +16,7 @@ const router = useRouter();
 const updateTask = async () => {
   await taskStore.updateTask();
   console.log("hola");
-  // loadTasks();
 };
-
-// const cancelModal = () => {
-//   router.push({ path: "/ToDo" });
-//   console.log("chau");
-// };
 
 const toggleModal = () => {
   modalActive.value = !modalActive.value;
@@ -33,14 +27,7 @@ const toggleModal = () => {
   <div v-if="modalActive" class="modal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <!-- <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button> -->
-        </div>
+        <div class="modal-header"></div>
         <div class="modal-body">
           <input type="text" v-model="selectedTask.title" />
         </div>
@@ -57,8 +44,9 @@ const toggleModal = () => {
             type="button"
             class="btn btn-primary"
             @click.prevent="updateTask()"
+            @click="toggleModal"
           >
-            Save
+            Update
           </button>
         </div>
       </div>
