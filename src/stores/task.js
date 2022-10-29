@@ -5,7 +5,9 @@ import { supabase } from "../supabase";
 
 export const useTaskStore = defineStore("tasks", {
   state: () => ({
-    tasks: null,
+    tasks: [],
+    modalActive: false,
+    selectedTask: {},
   }),
   actions: {
     async fetchTasks() {
@@ -31,6 +33,13 @@ export const useTaskStore = defineStore("tasks", {
         .from("tasks")
         .delete()
         .neq("id", 0);
+    },
+    async updateTask() {
+      console.log(this.selectedTask);
+      const { data, error } = await supabase
+        .from("tasks")
+        .update({ title: this.selectedTask.title })
+        .match({ id: this.selectedTask.id });
     },
   },
 });

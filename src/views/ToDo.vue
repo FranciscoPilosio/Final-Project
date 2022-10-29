@@ -7,12 +7,11 @@ import Modal from "../components/Modal.vue";
 
 const title = ref("");
 const complete = ref(false);
-const modalActive = ref(false);
 
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
 const taskStore = useTaskStore();
-const { tasks } = storeToRefs(taskStore);
+const { tasks, modalActive } = storeToRefs(taskStore);
 
 const addNewTask = async () => {
   await taskStore.createTask(title.value, complete.value, user._object.user.id);
@@ -34,20 +33,21 @@ const removeEachTask = async (task) => {
   loadTasks();
 };
 
-const removeAllTasks = async () => {
-  await taskStore.removeAllTasks();
-  loadTasks();
-};
+// const removeAllTasks = async () => {
+//   await taskStore.removeAllTasks();
+//   loadTasks();
+// };
 
-const toggleModal = () => {
+const toggleModal = (task) => {
   modalActive.value = !modalActive.value;
+  taskStore.selectedTask = task;
 };
 </script>
 
 <template>
-  <body class="container">
+  <body>
     <h1 class="pt-4">To do list</h1>
-    <form @submit.prevent="addNewTask">
+    <form @submit.prevent="addNewTask" class="container">
       <div class="form-floating">
         <input
           rows="1"
@@ -70,10 +70,18 @@ const toggleModal = () => {
             </p>
 
             <div class="p-2 bd-highlight">
-              <font-awesome-icon icon="trash" @click="removeEachTask(task)" />
+              <font-awesome-icon
+                class="icon"
+                icon="trash"
+                @click="removeEachTask(task)"
+              />
             </div>
             <div class="p-2 bd-highlight pe-5">
-              <font-awesome-icon icon="pen" @click="toggleModal" />
+              <font-awesome-icon
+                class="icon"
+                icon="pen"
+                @click="toggleModal(task)"
+              />
             </div>
           </div>
         </li>
@@ -102,5 +110,9 @@ h2 {
 ul {
   list-style-type: none;
   text-align-last: left;
+}
+
+.icon {
+  cursor: pointer;
 }
 </style>
