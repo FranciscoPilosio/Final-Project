@@ -15,7 +15,6 @@ const router = useRouter();
 
 const updateTask = async () => {
   await taskStore.updateTask();
-  console.log("hola");
 };
 
 const toggleModal = () => {
