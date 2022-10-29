@@ -31,35 +31,36 @@ export default {
 </script>
 
 <template>
-  <div class="wrapper fadeInDown">
-    <div id="formContent">
-      <!-- Tabs Titles -->
+  <body>
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles -->
 
-      <!-- Icon -->
-      <div class="fadeIn first mt-5">
-        <!-- <img src="@/assets/ironhack-1.svg" id="icon" alt="User Icon" /> -->
-        <h1>Sign Up</h1>
-      </div>
+        <!-- Icon -->
+        <div class="fadeIn first mt-5">
+          <!-- <img src="@/assets/ironhack-1.svg" id="icon" alt="User Icon" /> -->
+          <h1>Sign Up</h1>
+        </div>
 
-      <!-- Login Form -->
-      <form @submit.prevent="register">
-        <input
-          type="email"
-          id="login"
-          class="fadeIn second"
-          name="login"
-          placeholder="email"
-          v-model="email"
-        />
-        <input
-          type="password"
-          id="password"
-          class="fadeIn third"
-          name="login"
-          placeholder="password"
-          v-model="password"
-        />
-        <!-- <input
+        <!-- Login Form -->
+        <form @submit.prevent="register">
+          <input
+            type="email"
+            id="login"
+            class="fadeIn second"
+            name="login"
+            placeholder="email"
+            v-model="email"
+          />
+          <input
+            type="password"
+            id="password"
+            class="fadeIn third"
+            name="login"
+            placeholder="password"
+            v-model="password"
+          />
+          <!-- <input
           type="password"
           id="confirm password"
           class="fadeIn third"
@@ -67,10 +68,11 @@ export default {
           placeholder="confirm password"
           v-model="password"
         /> -->
-        <input type="submit" class="fadeIn fourth" value="Register" />
-      </form>
+          <input type="submit" class="fadeIn fourth" value="Register" />
+        </form>
+      </div>
     </div>
-  </div>
+  </body>
   <!-- <router-view></router-view> -->
 </template>
 
@@ -110,7 +112,7 @@ form {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   min-height: 100%;
   padding: 20px;

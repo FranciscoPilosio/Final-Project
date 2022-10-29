@@ -6,8 +6,6 @@ const userStore = useUserStore();
 
 const signOut = async function signOut() {
   userStore.singOut();
-
-  console.log(userStore);
   userStore.user = null;
 };
 </script>

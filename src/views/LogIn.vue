@@ -18,11 +18,9 @@ export default {
           password: password.value,
         });
         userStore.user = user;
-        console.log(user);
 
         if (user) {
           router.push({ path: "/ToDo" });
-          console.log(email, password);
         } else {
           router.push({ path: "/sign-up" });
         }
@@ -40,39 +38,41 @@ export default {
 </script>
 
 <template>
-  <div class="wrapper fadeInDown">
-    <div id="formContent">
-      <!-- Tabs Titles -->
+  <body>
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles -->
 
-      <!-- Icon -->
-      <div class="fadeIn first mt-5">
-        <!-- <img src="@/assets/ironhack-1.svg" id="icon" alt="User Icon" /> -->
-        <h1>Log In</h1>
+        <!-- Icon -->
+        <div class="fadeIn first mt-5">
+          <!-- <img src="@/assets/ironhack-1.svg" id="icon" alt="User Icon" /> -->
+          <h1>Log In</h1>
+        </div>
+
+        <!-- Login Form -->
+        <form @submit.prevent="login">
+          <input
+            type="email"
+            id="email"
+            class="fadeIn second"
+            name="login"
+            placeholder="email"
+            v-model="email"
+          />
+          <input
+            type="password"
+            id="password"
+            class="fadeIn third"
+            name="login"
+            placeholder="password"
+            v-model="password"
+          />
+
+          <input type="submit" class="fadeIn fourth" value="Log In" />
+        </form>
       </div>
-
-      <!-- Login Form -->
-      <form @submit.prevent="login">
-        <input
-          type="email"
-          id="email"
-          class="fadeIn second"
-          name="login"
-          placeholder="email"
-          v-model="email"
-        />
-        <input
-          type="password"
-          id="password"
-          class="fadeIn third"
-          name="login"
-          placeholder="password"
-          v-model="password"
-        />
-
-        <input type="submit" class="fadeIn fourth" value="Log In" />
-      </form>
     </div>
-  </div>
+  </body>
   <router-view></router-view>
 </template>
 
@@ -112,7 +112,7 @@ form {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   min-height: 100%;
   padding: 20px;

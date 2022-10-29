@@ -1,10 +1,13 @@
 <script setup>
 import Navbar from "./components/Navbar.vue";
+import Modal from "./components/Modal.vue";
 </script>
 
 <template>
   <header><Navbar /></header>
-  <body></body>
+  <!-- <body>
+    <Modal />
+  </body> -->
 </template>
 
 <style>
