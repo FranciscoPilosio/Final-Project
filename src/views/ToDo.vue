@@ -45,7 +45,7 @@ const toggleModal = (task) => {
 </script>
 
 <template>
-  <body>
+  <body class="first blur">
     <h1 class="pt-4">Your To do list</h1>
     <form @submit.prevent="addNewTask" class="container">
       <div class="form-floating">
@@ -63,6 +63,7 @@ const toggleModal = (task) => {
         <button class="btn btn-primary mt-3 mb-3">Add task</button>
       </div>
       <ul>
+        <Modal v-if="modalActive" />
         <li v-for="(task, index) in tasks" :key="index">
           <div class="d-flex bd-highlight">
             <p class="p-2 flex-grow-1 bd-highlight">
@@ -87,7 +88,6 @@ const toggleModal = (task) => {
         </li>
       </ul>
     </form>
-    <Modal v-if="modalActive" />
     <div>
       <h2 v-if="tasks == 0">No tasks pending! Well done</h2>
     </div>

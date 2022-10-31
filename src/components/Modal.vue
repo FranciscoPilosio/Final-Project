@@ -57,4 +57,8 @@ const toggleModal = () => {
 .modal {
   display: contents;
 }
+
+.modal-content {
+  position: absolute;
+}
 </style>
