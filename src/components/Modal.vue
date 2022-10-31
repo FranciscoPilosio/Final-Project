@@ -3,15 +3,14 @@ import { ref } from "vue";
 import { useUserStore } from "../stores/user";
 import { useTaskStore } from "../stores/task";
 import { storeToRefs } from "pinia";
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
 
 const title = ref("");
 
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
 const taskStore = useTaskStore();
-const { tasks, modalActive, selectedTask } = storeToRefs(taskStore);
-const router = useRouter();
+const { modalActive, selectedTask } = storeToRefs(taskStore);
 
 const updateTask = async () => {
   await taskStore.updateTask();

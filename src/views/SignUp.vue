@@ -1,5 +1,5 @@
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../stores/user";
 import { supabase } from "../supabase";
@@ -11,20 +11,37 @@ export default {
     const { user } = storeToRefs(userStore);
     const email = ref("");
     const password = ref("");
-    const register = async () => {
-      await userStore.signUp(email.value, password.value);
-      if (user) {
-        router.push({ path: "/log-in" });
-        console.log(user);
-      } else {
-        router.push({ path: "/sign-up" });
-      }
-    };
+    const confirmPassword = ref("");
+
+    // const register = async () => {
+    //   await userStore.signUp(email.value, password.value);
+    //   if (password.value === confirmPassword.value) {
+    //     alert("Please check yout email and confirm yout account");
+    //     router.push({ path: "/log-in" });
+    //     //   // console.log(user);
+    //   } else {
+    //     alert("Password do not match! Please, try again");
+    //     //   // router.push({ path: "/sign-up" });
+    //   }
+    //   console.log(password, confirmPassword);
+    // };
+
+    const registerAccount = computed(() => {
+      if (password.value === confirmPassword.value)
+        return async () => {
+          await userStore.signUp(email.value, password.value);
+          alert("well done");
+          router.push({ path: "/log-in" });
+        };
+      else alert("The password is wrong");
+      console.log(password.value, confirmPassword.value);
+    });
 
     return {
       email,
       password,
-      register,
+      confirmPassword,
+      registerAccount,
     };
   },
 };
@@ -43,7 +60,7 @@ export default {
         </div>
 
         <!-- Login Form -->
-        <form @submit.prevent="register">
+        <form @submit.prevent="registerAccount">
           <input
             type="email"
             id="login"
@@ -51,6 +68,7 @@ export default {
             name="login"
             placeholder="email"
             v-model="email"
+            required
           />
           <input
             type="password"
@@ -59,16 +77,19 @@ export default {
             name="login"
             placeholder="password"
             v-model="password"
+            required
           />
-          <!-- <input
-          type="password"
-          id="confirm password"
-          class="fadeIn third"
-          name="login"
-          placeholder="confirm password"
-          v-model="password"
-        /> -->
+          <input
+            type="password"
+            id="confirm password"
+            class="fadeIn third"
+            name="login"
+            placeholder="confirm password"
+            v-model="confirmPassword"
+            required
+          />
           <input type="submit" class="fadeIn fourth" value="Register" />
+          <!-- :disabled="password != confirmPassword" -->
         </form>
       </div>
     </div>

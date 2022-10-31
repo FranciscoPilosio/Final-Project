@@ -11,11 +11,12 @@ const complete = ref(false);
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
 const taskStore = useTaskStore();
-const { tasks, modalActive } = storeToRefs(taskStore);
+const { tasks, modalActive, selectedTask } = storeToRefs(taskStore);
 
 const addNewTask = async () => {
-  await taskStore.createTask(title.value, user._object.user.id);
+  await taskStore.createTask(title.value, complete.value, user._object.user.id);
   title.value = "";
+  complete.value = false;
 
   await taskStore.fetchTasks();
 };
@@ -50,8 +51,6 @@ const toggleDone = (task) => {
 const sortTask = computed(() =>
   tasks.value.sort((a, b) => Number(a.complete) - Number(b.complete))
 );
-
-console.log(sortTask.value);
 </script>
 
 <template>
@@ -81,6 +80,7 @@ console.log(sortTask.value);
                 {{ task.title }}
               </p>
             </div>
+
             <div class="p-2 bd-highlight">
               <font-awesome-icon
                 class="icon"
