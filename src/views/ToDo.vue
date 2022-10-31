@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useUserStore } from "../stores/user";
 import { useTaskStore } from "../stores/task";
 import { storeToRefs } from "pinia";
@@ -14,9 +14,9 @@ const taskStore = useTaskStore();
 const { tasks, modalActive } = storeToRefs(taskStore);
 
 const addNewTask = async () => {
-  await taskStore.createTask(title.value, complete.value, user._object.user.id);
+  await taskStore.createTask(title.value, user._object.user.id);
   title.value = "";
-  complete.value = false;
+
   await taskStore.fetchTasks();
 };
 
@@ -42,6 +42,16 @@ const toggleModal = (task) => {
   modalActive.value = !modalActive.value;
   taskStore.selectedTask = task;
 };
+
+const toggleDone = (task) => {
+  task.complete = !task.complete;
+};
+
+const sortTask = computed(() =>
+  tasks.value.sort((a, b) => Number(a.complete) - Number(b.complete))
+);
+
+console.log(sortTask.value);
 </script>
 
 <template>
@@ -62,14 +72,15 @@ const toggleModal = (task) => {
       <div class="d-grid gap-2">
         <button class="btn btn-primary mt-3 mb-3">Add task</button>
       </div>
+      <Modal v-if="modalActive" />
       <ul>
-        <Modal v-if="modalActive" />
-        <li v-for="(task, index) in tasks" :key="index">
+        <li v-for="(task, index) in sortTask" :key="index">
           <div class="d-flex bd-highlight">
-            <p class="p-2 flex-grow-1 bd-highlight">
-              {{ task.title }}
-            </p>
-
+            <div class="p-2 flex-grow-1 bd-highlight">
+              <p @click="toggleDone(task)" :class="{ done: task.complete }">
+                {{ task.title }}
+              </p>
+            </div>
             <div class="p-2 bd-highlight">
               <font-awesome-icon
                 class="icon"
@@ -114,5 +125,9 @@ ul {
 
 .icon {
   cursor: pointer;
+}
+
+.done {
+  text-decoration: line-through;
 }
 </style>

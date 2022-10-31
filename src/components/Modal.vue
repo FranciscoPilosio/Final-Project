@@ -61,4 +61,9 @@ const toggleModal = () => {
 .modal-content {
   position: absolute;
 }
+
+.modal-dialog {
+  margin-bottom: 0;
+  margin-top: 0;
+}
 </style>
