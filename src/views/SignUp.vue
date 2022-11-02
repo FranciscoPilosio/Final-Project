@@ -1,61 +1,38 @@
-<script>
-import { ref, computed } from "vue";
+<script setup>
+import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../stores/user";
-import { supabase } from "../supabase";
+
 import router from "../router";
 
-export default {
-  setup() {
-    const userStore = useUserStore();
-    const { user } = storeToRefs(userStore);
-    const email = ref("");
-    const password = ref("");
-    const confirmPassword = ref("");
+const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
+const email = ref("");
+const password = ref("");
+const confirmPassword = ref("");
+const showInvalidMessage = ref(false);
+const showMessage = ref(false);
 
-    // const register = async () => {
-    //   await userStore.signUp(email.value, password.value);
-    //   if (password.value === confirmPassword.value) {
-    //     alert("Please check yout email and confirm yout account");
-    //     router.push({ path: "/log-in" });
-    //     //   // console.log(user);
-    //   } else {
-    //     alert("Password do not match! Please, try again");
-    //     //   // router.push({ path: "/sign-up" });
-    //   }
-    //   console.log(password, confirmPassword);
-    // };
-
-    const registerAccount = computed(() => {
-      if (password.value === confirmPassword.value)
-        return async () => {
-          await userStore.signUp(email.value, password.value);
-          alert("well done");
-          router.push({ path: "/log-in" });
-        };
-      else alert("The password is wrong");
-      console.log(password.value, confirmPassword.value);
-    });
-
-    return {
-      email,
-      password,
-      confirmPassword,
-      registerAccount,
-    };
-  },
+const registerAccount = async () => {
+  if (password.value === confirmPassword.value) {
+    showMessage.value = true;
+    await userStore.signUp(email.value, password.value);
+    router.push({ path: "/log-in" });
+  } else {
+    showInvalidMessage.value = true;
+    password.value = "";
+    confirmPassword.value = "";
+  }
 };
+
+
 </script>
 
 <template>
   <body>
     <div class="wrapper fadeInDown">
       <div id="formContent">
-        <!-- Tabs Titles -->
-
-        <!-- Icon -->
         <div class="fadeIn first mt-5">
-          <!-- <img src="@/assets/ironhack-1.svg" id="icon" alt="User Icon" /> -->
           <h1>Sign Up</h1>
         </div>
 
@@ -89,12 +66,20 @@ export default {
             required
           />
           <input type="submit" class="fadeIn fourth" value="Register" />
-          <!-- :disabled="password != confirmPassword" -->
+          <div
+            v-if="showInvalidMessage"
+            class="alert alert-danger"
+            role="alert"
+          >
+            Try again! The passwords do not match
+          </div>
+          <div v-if="showMessage" class="alert alert-success" role="alert">
+            Great! Please check your email and confirm your account
+          </div>
         </form>
       </div>
     </div>
   </body>
-  <!-- <router-view></router-view> -->
 </template>
 
 <style scope>

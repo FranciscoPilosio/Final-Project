@@ -6,7 +6,6 @@ import { storeToRefs } from "pinia";
 import Modal from "../components/Modal.vue";
 
 const title = ref("");
-const complete = ref(false);
 
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
@@ -14,9 +13,9 @@ const taskStore = useTaskStore();
 const { tasks, modalActive, selectedTask } = storeToRefs(taskStore);
 
 const addNewTask = async () => {
-  await taskStore.createTask(title.value, complete.value, user._object.user.id);
+  await taskStore.createTask(title.value, user._object.user.id);
+
   title.value = "";
-  complete.value = false;
 
   await taskStore.fetchTasks();
 };
@@ -34,29 +33,25 @@ const removeEachTask = async (task) => {
   loadTasks();
 };
 
-// const removeAllTasks = async () => {
-//   await taskStore.removeAllTasks();
-//   loadTasks();
-// };
-
 const toggleModal = (task) => {
   modalActive.value = !modalActive.value;
   taskStore.selectedTask = task;
 };
 
-const toggleDone = (task) => {
-  task.complete = !task.complete;
+const updateStatus = async (task) => {
+  task.is_complete = !task.is_complete;
+  await taskStore.updateStatus(task.is_complete, task.id);
 };
 
 const sortTask = computed(() =>
-  tasks.value.sort((a, b) => Number(a.complete) - Number(b.complete))
+  tasks.value.sort((a, b) => Number(a.is_complete) - Number(b.is_complete))
 );
 </script>
 
 <template>
   <body class="first blur">
-    <h1 class="pt-4">Your To do list</h1>
-    <form @submit.prevent="addNewTask" class="container">
+    <h1 id="formTitle" class="pt-4">Your To do list</h1>
+    <form @submit.prevent="addNewTask" class="container" id="formStyle">
       <div class="form-floating">
         <input
           rows="1"
@@ -76,7 +71,11 @@ const sortTask = computed(() =>
         <li v-for="(task, index) in sortTask" :key="index">
           <div class="d-flex bd-highlight">
             <div class="p-2 flex-grow-1 bd-highlight">
-              <p @click="toggleDone(task)" :class="{ done: task.complete }">
+              <p
+                @click.prevent="updateStatus(task)"
+                :class="{ done: task.is_complete }"
+                id="taskLines"
+              >
                 {{ task.title }}
               </p>
             </div>
@@ -102,15 +101,6 @@ const sortTask = computed(() =>
     <div>
       <h2 v-if="tasks == 0">No tasks pending! Well done</h2>
     </div>
-    <!-- <input type="checkbox" v-model="complete" /> -->
-    <!-- <button
-    v-if="tasks >= 2"
-    type="button"
-    class="btn btn-primary"
-    @click="removeAllTasks"
-  >
-    Remove all tasks
-  </button> -->
   </body>
 </template>
 
@@ -121,6 +111,7 @@ h2 {
 ul {
   list-style-type: none;
   text-align-last: left;
+  font-family: "Monaco", monospace;
 }
 
 .icon {
@@ -129,5 +120,20 @@ ul {
 
 .done {
   text-decoration: line-through;
+}
+
+#formStyle,
+#formTitle {
+  font-family: "Monaco", monospace;
+}
+#taskLines {
+  cursor: pointer;
+  font-size: larger;
+}
+
+@media (max-width: 390px) {
+  #taskLines {
+    font-size: inherit;
+  }
 }
 </style>
