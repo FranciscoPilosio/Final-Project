@@ -14,7 +14,6 @@ const { tasks, modalActive, selectedTask } = storeToRefs(taskStore);
 
 const addNewTask = async () => {
   await taskStore.createTask(title.value, user._object.user.id);
-
   title.value = "";
 
   await taskStore.fetchTasks();
@@ -59,7 +58,7 @@ const sortTask = computed(() =>
           placeholder="Leave a comment here"
           id="floatingTextarea"
           name="title"
-          maxlength="65"
+          maxlength="40"
           v-model="title"
         />
         <label for="floatingTextarea">Add New Task</label>
