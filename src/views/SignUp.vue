@@ -1,31 +1,34 @@
 <script setup>
 import { ref } from "vue";
-import { storeToRefs } from "pinia";
 import { useUserStore } from "../stores/user";
 
 import router from "../router";
 
 const userStore = useUserStore();
-const { user } = storeToRefs(userStore);
 const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 const showInvalidMessage = ref(false);
 const showMessage = ref(false);
+const showInvalidPassword = ref(false);
 
 const registerAccount = async () => {
-  if (password.value === confirmPassword.value) {
+  if (password.value === confirmPassword.value && password.value.length >= 6) {
     showMessage.value = true;
-    await userStore.signUp(email.value, password.value);
-    router.push({ path: "/log-in" });
+    await userStore
+      .signUp(email.value, password.value)
+      .then(() => router.push({ path: "/log-in" }));
+  } else if (
+    password.value === confirmPassword.value &&
+    password.value.length <= 6
+  ) {
+    showInvalidPassword.value = true;
+    setTimeout(() => (showInvalidPassword.value = false), 5000);
   } else {
     showInvalidMessage.value = true;
-    password.value = "";
-    confirmPassword.value = "";
+    setTimeout(() => (showInvalidMessage.value = false), 4000);
   }
 };
-
-
 </script>
 
 <template>
@@ -66,6 +69,13 @@ const registerAccount = async () => {
             required
           />
           <input type="submit" class="fadeIn fourth" value="Register" />
+          <div
+            v-if="showInvalidPassword"
+            class="alert alert-danger"
+            role="alert"
+          >
+            Try again! The password should have at least 6 characters
+          </div>
           <div
             v-if="showInvalidMessage"
             class="alert alert-danger"

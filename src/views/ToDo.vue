@@ -50,7 +50,7 @@ const sortTask = computed(() =>
 
 <template>
   <body class="first blur">
-    <h1 id="formTitle" class="pt-4">Your To do list</h1>
+    <h1 id="formTitle" class="pt-4">Your To Do List</h1>
     <form @submit.prevent="addNewTask" class="container" id="formStyle">
       <div class="form-floating">
         <input
@@ -59,6 +59,7 @@ const sortTask = computed(() =>
           placeholder="Leave a comment here"
           id="floatingTextarea"
           name="title"
+          maxlength="65"
           v-model="title"
         />
         <label for="floatingTextarea">Add New Task</label>
@@ -110,7 +111,7 @@ h2 {
 }
 ul {
   list-style-type: none;
-  text-align-last: left;
+  text-align: left;
   font-family: "Monaco", monospace;
 }
 
