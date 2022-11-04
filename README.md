@@ -13,6 +13,8 @@ _This project is a To-do app created with **Vue.js** that allows users to create
 - Store: Pinia for persistent login
 - Database as a service: Supabase
 
+License: MIT
+
 ### App Functionalities
 
 - Authentication (sign up, sign in, sign out)
