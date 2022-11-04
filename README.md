@@ -55,7 +55,7 @@ npm run build
 
 ### :memo: License
 
-The MIT License (MIT)
+The MIT License
 
 Copyright 2022
 
