@@ -53,7 +53,9 @@ npm run dev
 npm run build
 ```
 
-### The MIT License /aur/license/MIT
+### ## :memo: License
+
+The [MIT License]() (MIT)
 
 Copyright 2022
 
