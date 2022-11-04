@@ -1,4 +1,4 @@
-# ToDo App
+# Welcome to my ToDo App 👋
 
 ## Description
 
@@ -8,34 +8,34 @@ _This project is a To-do app created with **Vue.js** that allows users to create
 
 ### Tech Stack :shipit:
 
--Client: Vue.js, Vite (dev server)
--Router: Vue Router
--Store: Pinia for persistent login
--Database as a service: Supabase
+- Client: Vue.js, Vite (dev server)
+- Router: Vue Router
+- Store: Pinia for persistent login
+- Database as a service: Supabase
 
 ### App Functionalities
 
--Authentication (sign up, sign in, sign out)
--A front-end that displays the user’s personal to-do list
--An ability to add new tasks
--An ability to edit existing tasks
--An ability to mark tasks as complete/incomplete
--An ability to delete existing tasks
--A store and a database that the app can call data from
+- Authentication (sign up, sign in, sign out)
+- A front-end that displays the user’s personal to-do list
+- An ability to add new tasks
+- An ability to edit existing tasks
+- An ability to mark tasks as complete/incomplete
+- An ability to delete existing tasks
+- A store and a database that the app can call data from
 
-### -latest
+#### -latest
 
 This template should help get you started developing with Vue 3 in Vite.
 
-### Recommended IDE Setup
+#### Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-### Customize configuration
+#### Customize configuration
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-### Project Setup
+#### Project Setup
 
 ```sh
 npm install
