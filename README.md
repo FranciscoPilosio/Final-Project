@@ -1,4 +1,29 @@
-# -latest
+# ToDo App
+
+## Description
+
+This project is a To-do app created with Vue.js that allows users to create an account, record tasks, edit them and mark them as complete. The app is be linked to a database (supabase), where all the user and task data will be stored.
+
+## Technical specifications
+
+### Tech Stack
+
+Client: Vue.js, Vite (dev server)
+Router: Vue Router
+Store: Pinia for persistent login
+Database as a service: Supabase
+
+### App Functionalities
+
+Authentication (sign up, sign in, sign out)
+A front-end that displays the user’s personal to-do list
+An ability to add new tasks
+An ability to edit existing tasks
+An ability to mark tasks as complete/incomplete
+An ability to delete existing tasks
+A store and a database that the app can call data from
+
+## -latest
 
 This template should help get you started developing with Vue 3 in Vite.
 
@@ -28,7 +53,7 @@ npm run dev
 npm run build
 ```
 
-/apm/l/:packageName
+### The MIT License
 
 Copyright 2022
 
